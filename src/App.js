@@ -26,7 +26,7 @@ function App() {
       try {
         const response = await getLinks();
         // API 응답을 카테고리별로 그룹화
-        const groupedLinks = response.data.reduce((acc, link) => {
+        const groupedLinks = response.data.content.reduce((acc, link) => {
           const category = link.category || '기타';
           acc[category] = acc[category] || [];
           acc[category].push(link);
@@ -130,7 +130,7 @@ function App() {
           }
         />
         <Route
-          path="/link/:linkId"
+          path="/links/:linkId"
           element={
             <div className="container mx-auto p-4 pt-20">
               <LinkDetailPage

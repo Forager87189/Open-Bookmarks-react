@@ -6,7 +6,7 @@ const LinkForm = () => {
   const [newLink, setNewLink] = useState({
     title: '',
     url: '',
-    description: '',
+    contents: '',
     category: '기술',
   });
   const [error, setError] = useState(null);
@@ -17,9 +17,10 @@ const LinkForm = () => {
     if (newLink.title && newLink.url) {
       try {
         await addLink(newLink);
-        setNewLink({ title: '', url: '', description: '', category: '기술' });
+        setNewLink({ title: '', url: '', contents: '', category: '기술' });
         navigate('/');
       } catch (err) {
+        console.log(err)
         setError('링크 추가에 실패했습니다.');
       }
     }
@@ -46,8 +47,8 @@ const LinkForm = () => {
         />
         <textarea
           placeholder="설명"
-          value={newLink.description}
-          onChange={(e) => setNewLink({ ...newLink, description: e.target.value })}
+          value={newLink.contents}
+          onChange={(e) => setNewLink({ ...newLink, contents: e.target.value })}
           className="w-full p-2 border rounded"
         ></textarea>
         <select
